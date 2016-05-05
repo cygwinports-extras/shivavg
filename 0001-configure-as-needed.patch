@@ -1,0 +1,56 @@
+This also fixes debuginfo by not clobbering CFLAGS.
+
+--- origsrc/ShivaVG-0.2.1/configure.in	2009-03-20 04:27:52.000000000 -0500
++++ src/ShivaVG-0.2.1/configure.in	2016-05-05 10:10:07.715716800 -0500
+@@ -141,7 +152,7 @@ esac
+ # ===============================================
+ # Check for OpenGL and GLUT libraries
+ 
+-LDFLAGS="$LDFLAGS $GL_LIB"
++LIBS="$LIBS $GL_LIB"
+ 
+ echo -n "checking for OpenGL library... "
+ AC_LINK_IFELSE([
+@@ -157,7 +168,7 @@ AC_LINK_IFELSE([
+ 		[has_glx="yes"], [has_glx="no"]) ;;
+ esac
+ 
+-LDFLAGS="$LDFLAGS $GLU_LIB"
++LIBS="$LIBS $GLU_LIB"
+ 
+ echo -n "checking for GLU library... "
+ AC_LINK_IFELSE([
+@@ -166,7 +177,7 @@ AC_LINK_IFELSE([
+ 	[has_glu="yes"] && [echo "yes"],
+ 	[has_glu="no"] && [echo "no"])
+ 
+-LDFLAGS="$LDFLAGS $GLUT_LIB"
++LIBS="$LIBS $GLUT_LIB"
+ 
+ echo -n "checking for GLUT library... "
+ AC_LINK_IFELSE([
+@@ -175,13 +186,12 @@ AC_LINK_IFELSE([
+ 	[has_glut="yes"] && [echo "yes"],
+ 	[has_glut="no"] && [echo "no"])
+ 
+-LDFLAGS=""
++LIBS=""
+ 
+ # ==============================================
+ # JPEG library required for VGImage example
+ 
+-CFLAGS="-I$prefix/include"
+-LDFLAGS="-ljpeg -L/usr/local/lib -L$prefix/lib"
++LIBS="-ljpeg -L/usr/local/lib -L$prefix/lib"
+ 
+ AC_CHECK_HEADERS(
+ 	[jpeglib.h],
+@@ -219,7 +229,7 @@ if test "x$build_test_pattern" = "xyes";
+ fi
+ 
+ CFLASGS=""
+-LDFLAGS=""
++LIBS=""
+ 
+ # ==============================================
+ # report failure on missing libraries

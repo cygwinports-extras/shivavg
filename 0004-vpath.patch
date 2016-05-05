@@ -1,0 +1,18 @@
+--- origsrc/ShivaVG-0.2.1/examples/Makefile.am	2009-03-20 04:27:52.000000000 -0500
++++ src/ShivaVG-0.2.1/examples/Makefile.am	2016-05-05 09:58:04.230845900 -0500
+@@ -1,5 +1,5 @@
+ # Relative path from here to uninstalled library
+-INCLUDE_VG_DIR = $(top_builddir)/include
++INCLUDE_VG_DIR = $(top_srcdir)/include
+ LIB_VG_DIR = $(top_builddir)/src
+ LIB_VG = ${LIB_VG_DIR}/libOpenVG.la
+ 
+--- origsrc/ShivaVG-0.2.1/src/Makefile.am	2009-03-20 04:27:52.000000000 -0500
++++ src/ShivaVG-0.2.1/src/Makefile.am	2016-05-05 10:05:40.750316500 -0500
+@@ -1,5 +1,5 @@
+ lib_LTLIBRARIES = libOpenVG.la
+-libOpenVG_la_CFLAGS = -ansi -pedantic -I$(top_builddir)/include/vg
++libOpenVG_la_CFLAGS = -ansi -pedantic -I$(top_srcdir)/include/vg
+ libOpenVG_la_SOURCES =\
+ 	shDefs.h\
+ 	shExtensions.h\

@@ -1,0 +1,12 @@
+glxext.h depends on types in glext.h
+
+--- origsrc/ShivaVG-0.2.1/src/shDefs.h	2009-03-20 04:27:52.000000000 -0500
++++ src/ShivaVG-0.2.1/src/shDefs.h	2016-05-05 10:27:44.593923300 -0500
+@@ -165,6 +165,7 @@ SHfloat getMaxFloat();
+ #  include <GL/glu.h>
+ #else
+ #  define GL_GLEXT_LEGACY /* don't include glext.h */
++#  define GLX_GLXEXT_LEGACY /* don't include glxext.h */
+ #  include <GL/gl.h>
+ #  include <GL/glu.h>
+ #  include <GL/glx.h>

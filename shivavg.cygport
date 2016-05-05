@@ -1,0 +1,43 @@
+NAME="shivavg"
+VERSION=0.2.1
+RELEASE=1
+CATEGORY="Libs"
+SUMMARY="OpenVG implementation"
+DESCRIPTION="ShivaVG is an open-source ANSI C implementation of the Khronos
+OpenVG specification for hardware-accelerated vector graphics API. It is built
+entirely on top of OpenGL."
+HOMEPAGE="https://sourceforge.net/projects/shivavg/"
+SRC_URI="mirror://sourceforge/shivavg/ShivaVG-${VERSION}.zip"
+SRC_DIR="ShivaVG-${VERSION}"
+PATCH_URI="
+	0001-configure-as-needed.patch
+	0002-configure-cygwin.patch
+	0003-configure-mingw.patch
+	0004-vpath.patch
+	0005-no-undefined.patch
+	0006-glxext-legacy.patch
+"
+
+PKG_NAMES="libOpenVG1 libOpenVG-devel"
+libOpenVG1_CONTENTS="usr/bin/cygOpenVG-1.dll usr/share/doc/"
+libOpenVG_devel_CONTENTS="usr/include/vg/ usr/lib/libOpenVG.dll.a usr/lib/pkgconfig/vg.pc"
+
+src_install() {
+	cd ${B}
+	# capitalized (VG, not vg)
+	cyginstall VG_includedir=/usr/include/VG
+
+	cat > vg.pc <<_EOF
+prefix=/usr
+exec_prefix=\${prefix}
+libdir=\${exec_prefix}/lib
+includedir=\${prefix}/include
+
+Name: vg
+Description: ShivaVG implementation of OpenVG specification
+Version: ${VERSION}
+Libs: -L\${libdir} -lOpenVG
+Libs.private: -lGLU -lGL
+_EOF
+	dopkgconfig vg.pc
+}

@@ -1,0 +1,20 @@
+--- origsrc/ShivaVG-0.2.1/configure.in	2009-03-20 04:27:52.000000000 -0500
++++ src/ShivaVG-0.2.1/configure.in	2016-05-05 10:10:07.715716800 -0500
+@@ -91,7 +91,16 @@ case "${host}" in
+ 	CONFIG_CFLAGS=""
+ 	CONFIG_LDFLAGS="-framework OpenGL -framework GLUT"
+ 	CONFIG_LDADD="" ;;
+-*mingw* | *cygwin*)
++*mingw*)
++	GL_DIR="GL"
++	GLUT_DIR="GL"
++	GL_LIB="-lopengl32"
++	GLU_LIB="-lglu32"
++	GLUT_LIB="-lglut"
++	CONFIG_CFLAGS=""
++	CONFIG_LDFLAGS=""
++	CONFIG_LDADD="-lglut -lglu32 -lopengl32" ;;
++*cygwin*)
+ 	GL_DIR="GL"
+ 	GLUT_DIR="GL"
+ 	GL_LIB="-lGL"

@@ -1,0 +1,21 @@
+--- origsrc/ShivaVG-0.2.1/configure.in	2009-03-20 04:27:52.000000000 -0500
++++ src/ShivaVG-0.2.1/configure.in	2016-05-05 10:10:07.715716800 -0500
+@@ -112,6 +121,8 @@ case "${host}" in
+ 	
+ esac
+ 
++AC_SUBST([GL_LIB])
++AC_SUBST([GLU_LIB])
+ AC_SUBST([CONFIG_CFLAGS])
+ AC_SUBST([CONFIG_LDFLAGS])
+ AC_SUBST([CONFIG_LDADD])
+--- origsrc/ShivaVG-0.2.1/src/Makefile.am	2009-03-20 04:27:52.000000000 -0500
++++ src/ShivaVG-0.2.1/src/Makefile.am	2016-05-05 10:05:40.750316500 -0500
+@@ -1,5 +1,7 @@
+ lib_LTLIBRARIES = libOpenVG.la
+ libOpenVG_la_CFLAGS = -ansi -pedantic -I$(top_srcdir)/include/vg
++libOpenVG_la_LDFLAGS = -no-undefined -version-info 1:0:0
++libOpenVG_la_LIBADD = $(GLU_LIB) $(GL_LIB)
+ libOpenVG_la_SOURCES =\
+ 	shDefs.h\
+ 	shExtensions.h\

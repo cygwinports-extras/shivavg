@@ -1,0 +1,38 @@
+--- origsrc/ShivaVG-0.2.1/configure.in	2009-03-20 04:27:52.000000000 -0500
++++ src/ShivaVG-0.2.1/configure.in	2016-05-05 10:10:07.715716800 -0500
+@@ -96,7 +96,7 @@ case "${host}" in
+ 	GLUT_DIR="GL"
+ 	GL_LIB="-lGL"
+ 	GLU_LIB="-lGLU"
+-	GLUT_FLAGS="-lglut"
++	GLUT_LIB="-lglut"
+ 	CONFIG_CFLAGS=""
+ 	CONFIG_LDFLAGS=""
+ 	CONFIG_LDADD="-lglut -lGL -lGLU" ;;
+@@ -132,7 +143,7 @@ AC_CHECK_HEADERS(
+ 	[has_glut_h="yes"], [has_glut_h="no"])
+ 
+ case "${host}" in
+-*linux*)
++*linux*|*cygwin*)
+ 	AC_CHECK_HEADERS(
+ 		[$GL_DIR/glx.h],
+ 		[has_glx_h]="yes", [has_glx_h]="no") ;;
+@@ -151,7 +162,7 @@ AC_LINK_IFELSE([
+ 	[has_gl="no"] && [echo "no"])
+ 
+ case "${host}" in
+-*linux*)
++*linux*|*cygwin*)
+ 	AC_CHECK_LIB(
+ 		[GL], glXGetProcAddress,
+ 		[has_glx="yes"], [has_glx="no"]) ;;
+@@ -272,7 +282,7 @@ if test "x$has_glu" = "xno"; then
+ fi
+ 
+ case "${host}" in
+-*linux*)
++*linux*|*cygwin*)
+ 	if test "x$has_glx_h" = "xno"; then
+ 		AC_MSG_FAILURE([$NO_GLX_H_MSG])
+ 	fi
